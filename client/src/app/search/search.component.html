@@ -1,5 +1,15 @@
-<p style="text-align: center">Movies</p>
+<h1 style="text-align: center">Movies</h1>
 
+<input type="text" (keyup)="searchRequest($event)">
+
+<h2>Search result</h2>
+<ul>
+  <li *ngFor="let m of searchResults.content; let i=index;">
+    {{m.title}}
+  </li>
+</ul>
+
+<h2>All</h2>
 <ul>
   <li *ngFor="let m of movies.content; let i=index;">
     {{m.title}}

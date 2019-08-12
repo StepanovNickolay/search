@@ -1,17 +1,33 @@
+version: '2'
+
 services:
     es:
         image: docker.elastic.co/elasticsearch/elasticsearch:6.8.1
         environment:
-              - cluster.name=es
-              - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-        volumes:
-              - esdata:/usr/share/elasticsearch/data
+            - cluster.name=es
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
         ports:
-              - 9200:9200
-              - 9300:9300
+            - 9200:9200
+            - 9300:9300
+        networks:
+            - es
     searchbackend:
         build:
             context: .
             dockerfile: server/Dockerfile
         ports:
-              - 7111:80
+            - 7111:80
+        depends_on:
+            - es
+    searchfrontend:
+        build:
+            context: .
+            dockerfile: client/Dockerfile
+        ports:
+            - 4200:80
+        depends_on:
+            - searchbackend
+
+networks:
+    es:
+        driver: bridge

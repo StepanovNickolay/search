@@ -10,6 +10,8 @@ export class SearchComponent implements OnInit {
 
   movies: any = [];
 
+  searchResults: any = [];
+
   constructor(private movieService: MovieService) {
   }
 
@@ -20,8 +22,14 @@ export class SearchComponent implements OnInit {
   getMovies() {
     this.movies = [];
     this.movieService.getMovies().subscribe((data: {}) => {
-      console.log(data);
       this.movies = data;
+    });
+  }
+
+  searchRequest(e) {
+    const search = e.target.value;
+    this.searchResults = this.movieService.search(search).subscribe((data: {}) => {
+      this.searchResults = data;
     });
   }
 

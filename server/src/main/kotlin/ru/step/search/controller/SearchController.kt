@@ -3,6 +3,7 @@ package ru.step.search.controller
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
@@ -27,5 +28,11 @@ class SearchController(
     @ApiOperation("Получить все")
     fun getById(@PathVariable id: UUID): Movie? {
         return movieService.getById(id).orElse(null)
+    }
+
+    @GetMapping("/search")
+    @ApiOperation("Поиск")
+    fun search(@RequestParam search: String, pageable: Pageable): Page<Movie> {
+        return movieService.search(search, pageable)
     }
 }

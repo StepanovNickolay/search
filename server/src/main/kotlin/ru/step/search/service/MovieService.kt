@@ -9,4 +9,6 @@ interface MovieService {
     fun getAll(pageable: Pageable): Page<Movie>
 
     fun getById(id: UUID): Optional<Movie>
+
+    fun search(search: String, pageable: Pageable): Page<Movie>
 }

@@ -19,7 +19,13 @@ export class MovieService {
   }
 
   getMovies(): Observable<any> {
-    return this.http.get(endpoint).pipe(
+    return this.http.get(endpoint + '?page=0&size=300').pipe(
+      map(this.extractData)
+    );
+  }
+
+  search(search: string): Observable<any> {
+    return this.http.get(endpoint + '/search?search=' + search).pipe(
       map(this.extractData)
     );
   }
