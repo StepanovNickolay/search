@@ -7,8 +7,8 @@ server:
 spring:
   data:
     elasticsearch:
-      cluster-name: docker-cluster
-      cluster-nodes: localhost:9300
+      cluster-nodes: es:9300
+      cluster-name: es
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     serialization:

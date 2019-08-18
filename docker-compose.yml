@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
     es:
@@ -10,24 +10,33 @@ services:
             - 9200:9200
             - 9300:9300
         networks:
-            - es
+            - es-network
     searchbackend:
         build:
-            context: .
-            dockerfile: server/Dockerfile
+            context: server
+            dockerfile: Dockerfile
+            args:
+                     JAR_FILE: search-server-1.0.0.jar
         ports:
             - 7111:80
+        restart: on-failure
         depends_on:
             - es
+        links:
+            - es:es
+        networks:
+            - es-network
     searchfrontend:
         build:
-            context: .
-            dockerfile: client/Dockerfile
+            context: client
+            dockerfile: Dockerfile
         ports:
             - 4200:80
         depends_on:
             - searchbackend
+        networks:
+            - es-network
 
 networks:
-    es:
+    es-network:
         driver: bridge
