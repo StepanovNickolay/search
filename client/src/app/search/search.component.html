@@ -1,17 +1,24 @@
-<h1 style="text-align: center">Movies</h1>
+<h1 style="text-align: center">Search example</h1>
 
-<input type="text" (keyup)="searchRequest($event)">
+<div class="row">
+  <div class="column">
+    <h2>Search</h2>
 
-<h2>Search result</h2>
-<ul>
-  <li *ngFor="let m of searchResults.content; let i=index;">
-    {{m.title}}
-  </li>
-</ul>
+    <input type="text" (keyup)="searchRequest($event)">
 
-<h2>All</h2>
-<ul>
-  <li *ngFor="let m of movies.content; let i=index;">
-    {{m.title}}
-  </li>
-</ul>
+    <h2>Search result</h2>
+    <ul>
+      <li *ngFor="let m of searchResults.content; let i=index;">
+        {{m.title}}
+      </li>
+    </ul>
+  </div>
+  <div class="column">
+    <h2>All movies</h2>
+    <ul>
+      <li *ngFor="let m of movies.content; let i=index;">
+        {{m.title}}
+      </li>
+    </ul>
+  </div>
+</div>
