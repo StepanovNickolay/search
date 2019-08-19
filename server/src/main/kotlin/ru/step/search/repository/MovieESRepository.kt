@@ -8,6 +8,6 @@ import ru.step.search.model.Movie
 import java.util.*
 
 @Repository
-interface MovieESRepository: ElasticsearchRepository<Movie, UUID>{
+interface MovieESRepository : ElasticsearchRepository<Movie, UUID>, CustomMovieRepository {
     fun findAllByTitleIsLike(title: String, pageable: Pageable): Page<Movie>
 }

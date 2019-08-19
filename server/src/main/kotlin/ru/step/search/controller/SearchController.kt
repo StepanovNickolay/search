@@ -24,12 +24,6 @@ class SearchController(
         return movieService.getAll(pageable)
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation("Получить все")
-    fun getById(@PathVariable id: UUID): Movie? {
-        return movieService.getById(id).orElse(null)
-    }
-
     @GetMapping("/search")
     @ApiOperation("Поиск")
     fun search(@RequestParam search: String, pageable: Pageable): Page<Movie> {

@@ -1,6 +1,5 @@
 package ru.step.search.service.impl
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
@@ -15,7 +14,12 @@ class MovieServiceImpl(
 ) : MovieService {
     override fun getAll(pageable: Pageable) = movieESRepository.findAll(pageable)
 
-    override fun getById(id: UUID) = movieESRepository.findById(id)
-
-    override fun search(search: String, pageable: Pageable) = movieESRepository.findAllByTitleIsLike(search, pageable)
+    override fun search(search: String, pageable: Pageable): Page<Movie> {
+        return movieESRepository.fullTextSearch(
+                fields = listOf("title"),
+                value = search,
+                result = Movie::class.java,
+                pageable = pageable
+        )
+    }
 }
