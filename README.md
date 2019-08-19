@@ -24,11 +24,11 @@ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elas
 backend
 ```
 docker build -t search-server:dev  --build-arg JAR_FILE=search-server-1.0.0.jar server
-docker run -p 7111:80 search-server
+docker run -p 7111:80 search-server:dev
 ```
 
 frontend
 ```
 docker build -t search-client:dev client 
-docker run -p 4200:80 search-client
+docker run -p 4200:80 search-client:dev
 ```
